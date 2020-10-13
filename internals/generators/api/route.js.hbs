@@ -1,0 +1,22 @@
+const express = require('express');
+const {validate} = require('express-validation');
+const {{name}}Validation = require('./{{name}}.validation');
+const {{name}}Ctrl = require('./{{name}}.controller');
+const { authentication } = require('../../middleware/authentication');
+
+const router = express.Router();
+
+router
+.route('/')
+.get(authentication(['user', 'admin']), {{name}}Ctrl.list)
+.post(authentication(['user', 'admin']), validate({{name}}Validation.create), {{name}}Ctrl.create);
+
+router
+.route('/:{{name}}Id')
+.get(authentication(['user', 'admin']), {{name}}Ctrl.get)
+.put(authentication(['user', 'admin']), validate({{name}}Validation.update), {{name}}Ctrl.update)
+.delete(authentication(['user', 'admin']), {{name}}Ctrl.remove);
+
+router.param('{{name}}Id', {{name}}Ctrl.load);
+
+module.exports = router;

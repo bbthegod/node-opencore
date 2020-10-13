@@ -1,0 +1,43 @@
+const httpStatus = require('http-status');
+const {{properCase name}} = require('./{{name}}.model');
+
+async function load(req, res, next, id) {
+const {{name}} = await {{properCase name}}.findById(id);
+if (!{{name}}) return res.status(httpStatus.NOT_FOUND).end();
+req.{{name}} = {{name}};
+return next();
+}
+
+function get(req, res) {
+return res.json(req.{{name}});
+}
+
+function create(req, res) {
+const { title, content } = req.body;
+const {{name}} = new {{properCase name}}({title,content});
+{{name}}.save();
+return res.json({{name}});
+}
+
+function update(req, res) {
+const { title, content } = req.body;
+const { {{name}} } = req;
+{{name}}.title = title;
+{{name}}.content = content;
+{{name}}.save();
+return res.json({{name}});
+}
+
+async function list(req, res) {
+const { limit = 50, skip = 0, filter, sort } = req.query;
+const {{name}}s = await {{properCase name}}.list({ limit, skip, filter, sort });
+return res.json({{name}}s);
+}
+
+function remove(req, res) {
+const { {{name}} } = req;
+{{name}}.remove();
+return res.json({{name}});
+}
+
+module.exports = { load, get, create, update, list, remove };

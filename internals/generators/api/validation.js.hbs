@@ -1,0 +1,22 @@
+const { Joi } = require('express-validation');
+
+module.exports = {
+create: {
+body: Joi.object({
+title: Joi.string().required(),
+content: Joi.string().required(),
+}),
+},
+
+update: {
+body: Joi.object({
+title: Joi.string().required(),
+content: Joi.string().required(),
+}),
+params: Joi.object({
+{{name}}Id: Joi.string()
+.hex()
+.required(),
+}),
+},
+};
