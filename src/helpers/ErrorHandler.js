@@ -1,15 +1,12 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable max-len */
 /* eslint-disable max-classes-per-file */
 const httpStatus = require('http-status');
 
 class ExtendableError extends Error {
-  constructor(message, status, isPublic) {
+  constructor(message, status) {
     super(message);
     this.name = this.constructor.name;
     this.message = message;
     this.status = status;
-    this.isPublic = isPublic;
   }
 }
 

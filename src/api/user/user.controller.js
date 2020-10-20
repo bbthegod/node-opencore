@@ -42,8 +42,8 @@ function update(req, res) {
 }
 
 async function list(req, res) {
-  const { limit = 50, skip = 0, filter, sort } = req.query;
-  const users = await User.list({ limit, skip, filter, sort });
+  const { limit = 50, skip = 1, filter, sort } = req.query;
+  const users = await User.List({ limit, skip, filter, sort });
   return res.json(users);
 }
 

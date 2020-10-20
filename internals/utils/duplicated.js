@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const allAPI = fs.readdirSync(path.join(__dirname, '../../../src/api'));
+const allAPI = fs.readdirSync(path.join(__dirname, '../../src/api'));
 const api = allAPI.concat(allAPI);
 
 module.exports = (newAPI) => api.indexOf(newAPI) >= 0;

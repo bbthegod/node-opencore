@@ -30,7 +30,7 @@ return res.json({{name}});
 
 async function list(req, res) {
 const { limit = 50, skip = 0, filter, sort } = req.query;
-const {{name}}s = await {{properCase name}}.list({ limit, skip, filter, sort });
+const {{name}}s = await {{properCase name}}.List({ limit, skip, filter, sort });
 return res.json({{name}}s);
 }
 

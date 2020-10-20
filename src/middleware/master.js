@@ -1,10 +1,9 @@
 const httpStatus = require('http-status');
-const config = require('../../config/config');
-const ErrorHandler = require('../helpers/ErrorHandler');
+const { MASTER_SECRET } = require('../config/config');
 
 function master(req, res, next) {
-  if (req.token && req.token === config.masterSecret) return next();
-  return next(new ErrorHandler('Master key is not correct', httpStatus.UNAUTHORIZED, true));
+  if (req.token && req.token === MASTER_SECRET) return next();
+  return res.status(httpStatus.UNAUTHORIZED).json('MASTER KEY IS REQUIRED OR NOT CORRECT');
 }
 
-module.exports = { master };
+module.exports = master;

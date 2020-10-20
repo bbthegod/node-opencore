@@ -37,7 +37,7 @@ UserSchema.pre('save', function (next) {
 });
 
 UserSchema.statics = {
-  async list({ skip = 0, limit = 500, sort = { createdAt: -1 }, filter = {} }) {
+  async List({ skip = 0, limit = 500, sort = { createdAt: -1 }, filter = {} }) {
     const data = await this.find(filter, { createdAt: 0, updatedAt: 0, password: 0 })
       .sort(sort)
       .skip(+skip)

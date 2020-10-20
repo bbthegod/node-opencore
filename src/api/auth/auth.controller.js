@@ -1,47 +1,35 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const httpStatus = require('http-status');
-const config = require('../../../config/config');
+const { JWT_SECRET } = require('../../config/config');
 const User = require('../user/user.model');
-const ErrorHandler = require('../../helpers/ErrorHandler.js');
 
 function successResponse(user, res) {
-  const token = jwt.sign(
-    {
-      _id: user.id,
-      username: user.username,
-    },
-    config.jwtSecret,
-  );
+  const token = jwt.sign({ _id: user.id, username: user.username }, JWT_SECRET);
   res.status(httpStatus.OK).json({
     token,
-    user: {
-      username: user.username,
-      phone: user.role,
-    },
+    user: { username: user.username, phone: user.role },
   });
 }
 
-function errorResponse(next) {
-  const err = new ErrorHandler('Authentication error', httpStatus.UNAUTHORIZED, true);
-  return next(err);
+function errorResponse(res) {
+  return res.status(httpStatus.UNAUTHORIZED).json('UNAUTHORIZED');
 }
 
-async function login(req, res, next) {
+async function login(req, res) {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
   if (user) {
     bcrypt.compare(password, user.password, (err, decode) => {
       if (decode) return successResponse(user, res);
-      return errorResponse(next);
+      return errorResponse(res);
     });
   } else {
-    errorResponse(next);
+    errorResponse(res);
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-function check(req, res, next) {
+function check(req, res) {
   res.status(httpStatus.OK).end();
 }
 

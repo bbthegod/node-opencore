@@ -5,12 +5,12 @@
 /* eslint-disable no-undef */
 const jwt = require('jsonwebtoken');
 const httpStatus = require('http-status');
-const config = require('../../config/config');
+const { JWT_SECRET } = require('../config/config');
 const User = require('../api/user/user.model');
 
 function authentication(array) {
   return async (req, res, next) => {
-    jwt.verify(req.token, config.jwtSecret, async (err, data) => {
+    jwt.verify(req.token, JWT_SECRET, async (err, data) => {
       if (err) return next(err);
       const filter = { createdAt: 0, updatedAt: 0 };
       const user = await User.findOne({ studentCode: data.studentCode }, filter);
@@ -18,9 +18,9 @@ function authentication(array) {
         req.auth = user;
         return next();
       }
-      return res.status(httpStatus.UNAUTHORIZED).end();
+      return res.status(httpStatus.UNAUTHORIZED).json('UNAUTHORIZED');
     });
   };
 }
 
-module.exports = { authentication };
+module.exports = authentication;

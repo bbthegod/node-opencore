@@ -7,8 +7,8 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
-const routes = require('../src/route');
-const error = require('../src/middleware/error');
+const routes = require('../route');
+const { notFound, handler, converter } = require('../middleware/error');
 
 const app = express();
 
@@ -22,11 +22,8 @@ app.use(helmet());
 app.use(cors());
 app.use(morgan(':method :url :status :response-time ms'));
 app.use('/api', routes);
-
-app.use(error.notFound);
-
-app.use(error.converter);
-
-app.use(error.handler);
+app.use(converter);
+app.use(notFound);
+app.use(handler);
 
 module.exports = app;

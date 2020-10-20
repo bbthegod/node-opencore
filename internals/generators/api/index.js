@@ -3,7 +3,7 @@
 'use strict';
 
 const path = require('path');
-const duplicated = require('../utils/duplicated');
+const duplicated = require('../../utils/duplicated');
 
 const apiPath = path.join(__dirname, '../../src/api');
 
@@ -57,14 +57,14 @@ module.exports = {
     actions.push({
       type: 'modify',
       path: '../../src/route.js',
-      pattern: /(const .*Routes = require.*;\n)+/g,
+      pattern: /(const .* = require.*;\n)+/g,
       templateFile: './api/changeRoute/require.hbs',
     });
 
     actions.push({
       type: 'modify',
       path: '../../src/route.js',
-      pattern: /(router.*Routes.*;\n)+/g,
+      pattern: /(router..*;\n)+/g,
       templateFile: './api/changeRoute/routerUse.hbs',
     });
 

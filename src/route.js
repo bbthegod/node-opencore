@@ -1,9 +1,9 @@
 const express = require('express');
-const userRoutes = require('./api/user/user.route');
-const authRoutes = require('./api/auth/auth.route');
+const user = require('./api/user/user.route');
+const auth = require('./api/auth/auth.route');
 
 const router = express.Router();
-router.get('/health-check', (req, res) => res.send('OK'));
-router.use('/user', userRoutes);
-router.use('/auth', authRoutes);
+router.get('/health', (req, res) => res.send('OK'));
+router.use('/user', user);
+router.use('/auth', auth);
 module.exports = router;
