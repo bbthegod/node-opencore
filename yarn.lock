@@ -1256,6 +1256,11 @@ express-bearer-token@^2.4.0:
     cookie "^0.3.1"
     cookie-parser "^1.4.4"
 
+express-rate-limit@^5.2.3:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-5.2.3.tgz#ae73b3dc723decd697797611bd96e9b34a912f6c"
+  integrity sha512-cjQH+oDrEPXxc569XvxhHC6QXqJiuBT6BhZ70X3bdAImcnHnTNMVuMAJaT0TXPoRiEErUrVPRcOTpZpM36VbOQ==
+
 express-validation@3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/express-validation/-/express-validation-3.0.6.tgz#fdec4c418a9a0ecdce790bad3750286e8d777238"

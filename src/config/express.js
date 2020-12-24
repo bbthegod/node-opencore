@@ -9,12 +9,14 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const routes = require('../route');
 const { notFound, handler, converter } = require('../middleware/error');
+const { limit } = require('../middleware/limit');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(limit);
 app.use(compress());
 app.use(methodOverride());
 app.use(bearerToken());
